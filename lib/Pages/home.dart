@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water_intake/Components/waterTile.dart';
 import 'package:water_intake/data/water_data.dart';
 import 'package:water_intake/models/waterModel.dart';
 import '../Constants//Links.dart';
@@ -35,6 +36,8 @@ class _HomePageState extends State<HomePage> {
     if (!context.mounted) {
       return;
     }
+
+    amountController.clear();
   }
 
   void addWater() {
@@ -96,10 +99,7 @@ class _HomePageState extends State<HomePage> {
           itemCount: value.waterDataList.length,
           itemBuilder: (context, index) {
             final waterModel = value.waterDataList[index];
-            return ListTile(
-              title: Text(waterModel.Amount.toString()),
-              subtitle: Text(waterModel.id ?? 'No ID'),
-            );
+            return WaterTile(waterModel: waterModel);
           },
         ),
         backgroundColor: Theme.of(context).colorScheme.surface,
