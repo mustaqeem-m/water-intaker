@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:water_intake/Components/waterTile.dart';
+import 'package:water_intake/Pages/aboutScreen.dart';
+import 'package:water_intake/Pages/settingsScreen.dart';
 import 'package:water_intake/data/water_data.dart';
 import 'package:water_intake/models/waterModel.dart';
 import '../Constants//Links.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
-import 'package:water_intake/data/water_data.dart';
 import 'package:water_intake/Components/waterIntakeSummary.dart';
+import 'package:water_intake/Pages/AboutScreen.dart' hide Aboutscreen;
+import 'package:water_intake/Pages/SettingsScreen.dart' hide SettingsScreen;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -146,6 +149,42 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: addWater,
           child: Icon(Icons.add),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                child: Text(
+                  "Water Intaker",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsScreen()),
+                  );
+                },
+                title: Text('Settings'),
+              ),
+              ListTile(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Aboutscreen()),
+                  );
+                },
+                title: Text("About"),
+              ),
+            ],
+          ),
         ),
       ),
     );
